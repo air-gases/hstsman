@@ -29,13 +29,14 @@ func Gas(gc GasConfig) air.Gas {
 
 	return func(next air.Handler) air.Handler {
 		return func(req *air.Request, res *air.Response) error {
-			res.Header.Set("Strict-Transport-Security", directives)
-			err := next(req, res)
-			if err != nil && !res.Written {
-				res.Header.Del("Strict-Transport-Security")
+			if req.Air.HTTPSEnforced {
+				res.Header.Set(
+					"Strict-Transport-Security",
+					directives,
+				)
 			}
 
-			return err
+			return next(req, res)
 		}
 	}
 }
