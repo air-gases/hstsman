@@ -1,0 +1,41 @@
+package hstsman
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/aofei/air"
+)
+
+// GasConfig is a set of configurations for the `Gas()`.
+type GasConfig struct {
+	MaxAge            int
+	IncludeSubDomains bool
+}
+
+// Gas returns an `air.Gas` that is used to manage "Strict-Transport-Security"
+// header based on the gc.
+func Gas(gc GasConfig) air.Gas {
+	ds := []string{}
+	if gc.MaxAge >= 0 {
+		ds = append(ds, fmt.Sprintf("max-age=%d", gc.MaxAge))
+	}
+
+	if gc.IncludeSubDomains {
+		ds = append(ds, "includeSubDomains")
+	}
+
+	directives := strings.Join(ds, "; ")
+
+	return func(next air.Handler) air.Handler {
+		return func(req *air.Request, res *air.Response) error {
+			res.Header.Set("Strict-Transport-Security", directives)
+			err := next(req, res)
+			if err != nil && !res.Written {
+				res.Header.Del("Strict-Transport-Security")
+			}
+
+			return err
+		}
+	}
+}
