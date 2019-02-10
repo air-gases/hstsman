@@ -2,8 +2,8 @@
 
 [![GoDoc](https://godoc.org/github.com/air-gases/hstsman?status.svg)](https://godoc.org/github.com/air-gases/hstsman)
 
-A useful gas that used to manage Strict-Transport-Security header for the web
-applications built using [Air](https://github.com/aofei/air).
+A useful gas that used to manage the Strict-Transport-Security header for the
+web applications built using [Air](https://github.com/aofei/air).
 
 ## Installation
 

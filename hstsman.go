@@ -13,7 +13,7 @@ type GasConfig struct {
 	IncludeSubDomains bool
 }
 
-// Gas returns an `air.Gas` that is used to manage "Strict-Transport-Security"
+// Gas returns an `air.Gas` that is used to manage the Strict-Transport-Security
 // header based on the gc.
 func Gas(gc GasConfig) air.Gas {
 	ds := []string{}
