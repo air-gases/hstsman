@@ -15,7 +15,7 @@ $ go get github.com/air-gases/hstsman
 
 done.
 
-> The only requirement is the [Go](https://golang.org), at least v1.9.
+> The only requirement is the [Go](https://golang.org), at least v1.11.
 
 ## Usage
 
