@@ -11,6 +11,8 @@ import (
 type GasConfig struct {
 	MaxAge            int
 	IncludeSubDomains bool
+
+	Skippable func(*air.Request, *air.Response) bool
 }
 
 // Gas returns an `air.Gas` that is used to manage the Strict-Transport-Security
@@ -29,6 +31,10 @@ func Gas(gc GasConfig) air.Gas {
 
 	return func(next air.Handler) air.Handler {
 		return func(req *air.Request, res *air.Response) error {
+			if gc.Skippable != nil && gc.Skippable(req, res) {
+				return next(req, res)
+			}
+
 			if req.Air.HTTPSEnforced {
 				res.Header.Set(
 					"Strict-Transport-Security",
