@@ -1,6 +1,6 @@
 # Hstsman
 
-[![GoDoc](https://godoc.org/github.com/air-gases/hstsman?status.svg)](https://godoc.org/github.com/air-gases/hstsman)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/air-gases/hstsman)](https://pkg.go.dev/github.com/air-gases/hstsman)
 
 A useful gas that used to manage the Strict-Transport-Security header for the
 web applications built using [Air](https://github.com/aofei/air).
